@@ -1,0 +1,3 @@
+NAME = sus
+
+all: $(NAME)
