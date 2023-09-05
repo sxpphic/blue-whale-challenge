@@ -3,6 +3,6 @@
 FROM debian:bullseye
 RUN apt update && apt install -y mariadb-server
 
-EXPOSE 3307
+EXPOSE 3306
 
 CMD [ "mysqld" ]
