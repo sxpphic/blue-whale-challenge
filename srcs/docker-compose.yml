@@ -1,0 +1,8 @@
+version: '3.7'
+services:
+  mariadb:
+    image: mariadb
+    env_file:
+      - .env
+    ports:
+      - "3307:3306"
