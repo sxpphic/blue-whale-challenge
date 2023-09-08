@@ -7,7 +7,13 @@ maria:
 rm_maria:
 	docker image rm -f mariadb
 
+up: maria 
+	cd srcs && docker compose --env-file .env up -d
 
-$(NAME): maria
-	cd srcs && docker compose --env-file .env up
+down:
+	cd srcs && docker compose down
+
+
+
+$(NAME): up
 	
