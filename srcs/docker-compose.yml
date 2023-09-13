@@ -2,6 +2,7 @@ version: '3.8'
 services:
   mariadb:
     image: mariadb
+    user: "mysql:mysql"
     init: true
     env_file:
       - .env
@@ -10,4 +11,12 @@ services:
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     ports:
-      - 127.0.0.1:3306:3306
+      - 3306:3306
+    volumes:
+   # - type: bind
+    #  source: ~/data/db
+     # target: /var/lib/mysql/db
+      - ~/data/db:/var/lib/mysql/db
+    restart: always
+
+
