@@ -11,8 +11,10 @@ delete_all:
 #	docker container rm -f $(docker container ls -aq)
 #	docker image rm -f $(docker image ls -aq)
 
-up: maria 
-	cd srcs && docker compose up -d
+up: #maria 
+	cd srcs && docker compose build
+	cd srcs && docker compose up #-d
+
 
 down:
 	cd srcs && docker compose down
