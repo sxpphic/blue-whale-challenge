@@ -1,11 +1,7 @@
-#!bin/bash
+#!/bin/bash
 
-# CONFIGURE DB USERS
-mariadb << EOF
-CREATE DATABASE wordpressdb;
-CREATE USER '$MYSQL_USER'@'localhost' IDENTIFIED BY '$MYSQL_PASSWORD';
-ALTER USER 'root'@'localhost' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD';
-EOF
+#change db ownder from root to mysql
+chown mysql:mysql /var/lib/mysql/wordpressdb
 
-
-chown -R mysql:mysql /var/lib/mysql/wordpressdb
+#init mariadb service
+mariadbd
