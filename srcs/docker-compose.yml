@@ -3,18 +3,19 @@ services:
   mariadb:
     env_file:
       - .env
-    environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+
     build:
       context: requirements/mariadb
       dockerfile: Dockerfile
+      args:
+        - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+        - MYSQL_USER=${MYSQL_USER}
+        - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     init: true
     ports:
       - 3306:3306
     volumes:
-      - ~/data/db:/var/lib/mysql/db
+      - ~/data/wpdb:/var/lib/mysql/wordpressdb
     restart: always
   #  command: mariadb -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD';"
 
