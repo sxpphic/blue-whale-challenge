@@ -13,8 +13,8 @@ services:
         - MYSQL_USER=${MYSQL_USER}
         - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     init: true
-    ports:
-      - 3306:3306
+ #   ports:
+   #   - 3306:3306
     volumes:
       - ~/data/wpdb:/var/lib/mysql/wordpressdb
     restart: always
@@ -32,15 +32,17 @@ services:
         - CERTS_=${CERTS_}
     init: true
     ports:
-     # - 443:443
-      - 9000:9000
+      - 443:443
+  #    - 9000:9000
     volumes:
-      - ~/data/wpweb:/var/www/html/${DOMAIN_NAME}
+      - ~/data/wpweb:/var/www/html/${DOMAIN_NAME}/wordpress
     restart: always
     networks:
       - blue_network
 
   wordpress:
+      depends_on:
+        - mariadb
       env_file:
         - .env
       image: wordpress
@@ -52,11 +54,7 @@ services:
       init: true
       restart: always
       volumes:
-        - ~/data/wpweb:/var/www/html/${DOMAIN_NAME}
-
-   #   ports: 
- #      - 3306:3306
-  #     - 9000:9000
+        - ~/data/wpweb:/var/www/html/${DOMAIN_NAME}/wordpress
       networks:
         - blue_network  
     
