@@ -9,6 +9,7 @@ RUN apt update && apt install -y --no-install-recommends \
 	curl \
 	&& rm -rf /var/lib/apt/lists/*
 
+# tirar vim e curl
 EXPOSE 443
 EXPOSE 9000
 

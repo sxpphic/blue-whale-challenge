@@ -1,4 +1,5 @@
 version: '3.8'
+
 services:
   mariadb:
     env_file:
@@ -21,23 +22,38 @@ services:
       - blue_network
 
   nginx:
+    env_file:
+      - .env
     image: nginx
-    build: requirements/nginx
+    build:
+      context: requirements/nginx
+      dockerfile: Dockerfile
+      args:
+        - CERTS_=${CERTS_}
     init: true
     ports:
      # - 443:443
       - 9000:9000
-   # volumes:
-  #    - ~/data/wpweb:/
+    volumes:
+      - ~/data/wpweb:/var/www/html/${DOMAIN_NAME}
     restart: always
     networks:
       - blue_network
 
   wordpress:
+      env_file:
+        - .env
       image: wordpress
-      build: requirements/wordpress
+      build:
+        context: requirements/wordpress
+        dockerfile: Dockerfile
+        args:
+          - DOMAIN_NAME=${DOMAIN_NAME}
       init: true
       restart: always
+      volumes:
+        - ~/data/wpweb:/var/www/html/${DOMAIN_NAME}
+
    #   ports: 
  #      - 3306:3306
   #     - 9000:9000
