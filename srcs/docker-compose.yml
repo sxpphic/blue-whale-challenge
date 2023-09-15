@@ -3,7 +3,7 @@ services:
   mariadb:
     env_file:
       - .env
-
+    image: mariadb
     build:
       context: requirements/mariadb
       dockerfile: Dockerfile
@@ -17,6 +17,21 @@ services:
     volumes:
       - ~/data/wpdb:/var/lib/mysql/wordpressdb
     restart: always
-  #  command: mariadb -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD';"
+    networks:
+      - blue_network
+#  wordpress:
+  nginx:
+    image: nginx
+    build: requirements/nginx
+    init: true
+    ports:
+      - 443:443
+   # volumes:
+  #    - ~/data/wpweb: wp path
+    restart: always
+    networks:
+      - blue_network
 
+networks:
+  blue_network:
 

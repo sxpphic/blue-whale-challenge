@@ -2,7 +2,12 @@
 
 FROM debian:bullseye
 
-RUN apt update && apt install -y nginx && apt clean && rm -rf /var/lib/apt/lists/*
+RUN apt update && apt install -y --no-install-recommends \
+	openssl \
+	nginx \
+	vim \
+	curl \
+	&& rm -rf /var/lib/apt/lists/*
 
 EXPOSE 443
 
