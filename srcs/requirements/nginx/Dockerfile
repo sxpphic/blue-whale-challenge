@@ -10,5 +10,6 @@ RUN apt update && apt install -y --no-install-recommends \
 	&& rm -rf /var/lib/apt/lists/*
 
 EXPOSE 443
+EXPOSE 9000
 
 CMD  ["nginx", "-g", "daemon off;"]

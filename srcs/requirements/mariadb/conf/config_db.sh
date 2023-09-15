@@ -2,7 +2,7 @@
 
 # CONFIGURE DB USERS
 mariadb << EOF
-CREATE DATABASE wordpressdb; 
+CREATE DATABASE wordpressdb CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
 CREATE USER '$MYSQL_USER'@'localhost' IDENTIFIED BY '$MYSQL_PASSWORD';
 GRANT ALL PRIVILEGES ON wordpressdb.* TO '$MYSQL_USER'@'localhost';

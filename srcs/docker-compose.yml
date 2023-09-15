@@ -19,18 +19,31 @@ services:
     restart: always
     networks:
       - blue_network
-#  wordpress:
+
   nginx:
     image: nginx
     build: requirements/nginx
     init: true
     ports:
-      - 443:443
+     # - 443:443
+      - 9000:9000
    # volumes:
-  #    - ~/data/wpweb: wp path
+  #    - ~/data/wpweb:/
     restart: always
     networks:
       - blue_network
+
+  wordpress:
+      image: wordpress
+      build: requirements/wordpress
+      init: true
+      restart: always
+   #   ports: 
+ #      - 3306:3306
+  #     - 9000:9000
+      networks:
+        - blue_network  
+    
 
 networks:
   blue_network:
