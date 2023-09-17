@@ -30,12 +30,16 @@ services:
       dockerfile: Dockerfile
       args:
         - CERTS_=${CERTS_}
+        - DOMAIN_NAME=${DOMAIN_NAME}
+        - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+        - MYSQL_USER=${MYSQL_USER}
+        - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     init: true
     ports:
       - 443:443
   #    - 9000:9000
-    volumes:
-      - ~/data/wpweb:/var/www/html/${DOMAIN_NAME}/wordpress
+   # volumes:
+    #  - ~/data/wpweb:/var/www/html/${DOMAIN_NAME}/wordpress
     restart: always
     networks:
       - blue_network

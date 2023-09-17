@@ -10,7 +10,7 @@ RUN apt update && apt install -y --no-install-recommends \
 
 COPY ./conf/init_mariadb.sh .
 COPY ./conf/config_db.sh .
-#config envs
+
 ARG MYSQL_ROOT_PASSWORD
 ENV MYSQL_ROOT_PASSWORD $MYSQL_ROOT_PASSWORD
 ARG MYSQL_USER

@@ -17,4 +17,4 @@ RUN	curl https://wordpress.org/latest.tar.gz -o latest.tar.gz \
 EXPOSE 9000
 EXPOSE 3306
 
-CMD mv /wordpress/* /var/www/html/${DOMAIN_NAME}/wordpress/ && sleep 1000
+CMD
