@@ -12,13 +12,6 @@ RUN apt update && apt install -y --no-install-recommends \
 	wget \
 	&& rm -rf /var/lib/apt/lists/*
 
-ARG DOMAIN_NAME
-ENV DOMAIN_NAME=${DOMAIN_NAME}
-ARG MYSQL_USER
-ENV MYSQL_USER $MYSQL_USER
-ARG MYSQL_PASSWORD
-ENV MYSQL_PASSWORD $MYSQL_PASSWORD
-
 COPY tools/. .
 
 #RUN chmod +x wp_conf.sh \
