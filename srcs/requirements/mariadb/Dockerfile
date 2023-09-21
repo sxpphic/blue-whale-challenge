@@ -8,20 +8,17 @@ RUN apt update && apt install -y --no-install-recommends \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& chmod -R 755 /var/lib/mysql/
 
-COPY ./conf/init_mariadb.sh .
-COPY ./conf/config_db.sh .
+COPY ./tools/init_mariadb.sh .
 
-ARG MYSQL_ROOT_PASSWORD
-ENV MYSQL_ROOT_PASSWORD $MYSQL_ROOT_PASSWORD
-ARG MYSQL_USER
-ENV MYSQL_USER $MYSQL_USER
-ARG MYSQL_PASSWORD
-ENV MYSQL_PASSWORD $MYSQL_PASSWORD
 
-RUN chmod +x config_db.sh init_mariadb.sh \
-	&& service mariadb restart \
-	&& ./config_db.sh
+RUN chmod +x init_mariadb.sh
 
 EXPOSE 3306
 
-CMD ["./init_mariadb.sh"]
+VOLUME [ "/var/lib/mysql" ]
+
+
+ENTRYPOINT ["./init_mariadb.sh"]
+
+
+#CMD [ "mariadbd" ]

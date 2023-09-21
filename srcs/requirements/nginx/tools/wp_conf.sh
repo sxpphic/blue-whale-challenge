@@ -7,6 +7,6 @@ tar -xvzf latest.tar.gz
 rm latest.tar.gz
 
 useradd nginx
-groupadd nginx
+#groupadd nginx
 chown -R nginx /var/www/html/$DOMAIN_NAME/
 
