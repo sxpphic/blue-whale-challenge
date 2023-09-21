@@ -7,6 +7,7 @@ delete_all:
 #	docker image rm -f $(docker image ls -aq)
 
 up:
+	mkdir -p ~/data/mariadb
 	cd srcs && docker compose build
 	cd srcs && docker compose up -d
 

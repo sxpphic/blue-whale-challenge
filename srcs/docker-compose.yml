@@ -69,6 +69,6 @@ volumes:
   mariadb-volume:
     driver: local
     driver_opts:
+      o: bind
       type: none
       device: /home/kat/data/mariadb
-      o: bind
