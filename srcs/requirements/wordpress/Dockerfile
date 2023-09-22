@@ -16,8 +16,8 @@ RUN	curl https://wordpress.org/latest.tar.gz -o latest.tar.gz \
 	&& tar -xvzf latest.tar.gz \
 	&& rm latest.tar.gz \
 	&& chmod +x init_wp.sh \
-	&& mkdir -p /var/www/html/${DOMAIN_NAME} \
 	&& mkdir -p /run/php/
+	#&& mkdir -p /var/www/html/${DOMAIN_NAME} \
 
 EXPOSE 9000
 

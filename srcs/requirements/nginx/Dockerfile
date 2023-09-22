@@ -18,12 +18,12 @@ COPY conf/. .
 ARG DOMAIN_NAME
 
 RUN chmod +x init_nginx.sh\
-	&& mv example.com.conf /etc/nginx/conf.d/${DOMAIN_NAME}.conf \
-	&& sed -i "s/example.com/${DOMAIN_NAME}/g" /etc/nginx/conf.d/${DOMAIN_NAME}.conf \
-	&& service nginx stop
+	&& mv example.com.conf /etc/nginx/conf.d/wordpress.conf \
+#	&& sed -i "s/example.com/${DOMAIN_NAME}/g" /etc/nginx/conf.d/${DOMAIN_NAME}.conf \
+	&& service nginx restart
 # tirar vim e curl
 
-EXPOSE 443
+#EXPOSE 443
 
 #CMD  ["./init_nginx"]
 

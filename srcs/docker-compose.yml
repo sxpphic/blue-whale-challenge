@@ -31,12 +31,12 @@ services:
         - DOMAIN_NAME=${DOMAIN_NAME}
     init: true
     volumes:
-      - wordpress-volume:/var/www/html/${DOMAIN_NAME}/wordpress
+      - wordpress-volume:/var/www/html
     restart: always
     networks:
       - web
     ports:
-      - 443:443
+      - 80:80
   wordpress:
       depends_on:
         - mariadb
@@ -52,7 +52,7 @@ services:
       init: true
       restart: always
       volumes:
-      - wordpress-volume:/var/www/html/${DOMAIN_NAME}/wordpress
+      - wordpress-volume:/var/www/html
       networks:
         - web 
         - db
