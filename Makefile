@@ -4,6 +4,7 @@ all: $(NAME)
 
 up:
 	mkdir -p ~/data/mariadb
+	mkdir -p ~/data/wordpress
 	cd srcs && docker compose build
 	cd srcs && docker compose up -d
 

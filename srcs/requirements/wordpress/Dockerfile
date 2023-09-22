@@ -8,13 +8,17 @@ RUN	apt update && apt install -y --no-install-recommends \
 	curl \
 	&& rm -rf /var/lib/apt/lists/*
 
+COPY tools/init_wp.sh .
+
 ARG DOMAIN_NAME
-ENV DOMAIN_NAME=${DOMAIN_NAME}
 
 RUN	curl https://wordpress.org/latest.tar.gz -o latest.tar.gz \
-	&& tar -xvzf latest.tar.gz
+	&& tar -xvzf latest.tar.gz \
+	&& rm latest.tar.gz \
+	&& chmod +x init_wp.sh \
+	&& mkdir -p /var/www/html/${DOMAIN_NAME} \
+	&& mkdir -p /run/php/
 
 EXPOSE 9000
-EXPOSE 3306
 
-CMD
+CMD ["./init_wp.sh"]
