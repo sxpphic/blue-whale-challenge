@@ -27,6 +27,8 @@ services:
     build:
       context: requirements/nginx
       dockerfile: Dockerfile
+      args:
+        - DOMAIN_NAME=${DOMAIN_NAME}
     init: true
     volumes:
       - wordpress-volume:/var/www/html/${DOMAIN_NAME}/wordpress
