@@ -1,19 +1,33 @@
-NAME = sus
 
-all: $(NAME)
+all: up
 
 up:
 	mkdir -p ~/data/mariadb
 	mkdir -p ~/data/wordpress
-	cd srcs && docker compose build
-	cd srcs && docker compose up -d
+	docker compose -f ./srcs/docker-compose.yml up -d
 
 down:
-	cd srcs && docker compose down
+	docker compose -f ./srcs/docker-compose.yml down
 
-$(NAME): up
+stop:
+	docker compose -f ./srcs/docker-compose.yml stop
+
+start:
+	docker compose -f ./srcs/docker-compose.yml start
+
+rmi:
+	docker image prune -af
+
+rmc:
+	docker container prune -f
+
+statusc:
+	docker ps
+
+statusi:
+	docker image ls
 
 re: down up
 
-.PHONY: all up down re
+.PHONY: all up down re start stop
 	
