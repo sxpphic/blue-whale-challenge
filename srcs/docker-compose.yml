@@ -4,7 +4,6 @@ services:
   mariadb:
     env_file:
       - .env
-    image: mariadb
     container_name: mariadb
     build:
       context: requirements/mariadb
@@ -14,27 +13,24 @@ services:
       - mariadb-volume:/var/lib/mysql
     restart: always
     networks:
-      - db
-    ports:
-      - 3306:3306
+      - blue-network
+    #ports:
+    #  - 3306:3306
   nginx:
     depends_on:
       - wordpress
     env_file:
       - .env
     container_name: nginx
-    image: nginx
     build:
       context: requirements/nginx
       dockerfile: Dockerfile
-      args:
-        - DOMAIN_NAME=${DOMAIN_NAME}
     init: true
     volumes:
       - wordpress-volume:/var/www/html
     restart: always
     networks:
-      - web
+      - blue-network
     ports:
       - 80:80
   wordpress:
@@ -43,7 +39,6 @@ services:
       env_file:
         - .env
       container_name: wordpress
-      image: wordpress
       build:
         context: requirements/wordpress
         dockerfile: Dockerfile
@@ -54,13 +49,12 @@ services:
       volumes:
       - wordpress-volume:/var/www/html
       networks:
-        - web 
-        - db
-      ports:
-        - 9000:9000
+        - blue-network
+    #  ports:
+    #    - 9000:9000
 networks:
-  db:
-  web:
+  blue-network:
+    name: blue-network
 volumes:
   mariadb-volume:
     driver: local

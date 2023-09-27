@@ -5,22 +5,18 @@ FROM debian:bullseye
 RUN apt update && apt install -y --no-install-recommends \
 	openssl \
 	nginx \
-	vim \
 	curl \
-	php-fpm \
 	ca-certificates \
-	wget \
 	&& rm -rf /var/lib/apt/lists/*
 
-COPY tools/. .
-COPY conf/. .
+COPY conf/example.com.conf /etc/nginx/sites-available/default
 
-ARG DOMAIN_NAME
+#COPY tools/. .
+#COPY conf/. .
 
-RUN chmod +x init_nginx.sh\
-	&& mv example.com.conf /etc/nginx/conf.d/wordpress.conf \
-#	&& sed -i "s/example.com/${DOMAIN_NAME}/g" /etc/nginx/conf.d/${DOMAIN_NAME}.conf \
-	&& service nginx restart
+#ARG DOMAIN_NAME
+#RUN chmod +x init_nginx.sh\
+##	&& sed -i "s/example.com/${DOMAIN_NAME}/g" /etc/nginx/conf.d/${DOMAIN_NAME}.conf \
 # tirar vim e curl
 
 #EXPOSE 443
