@@ -16,4 +16,4 @@ EXPOSE 3306
 
 VOLUME [ "/var/lib/mysql" ]
 
-ENTRYPOINT ["./init_mariadb.sh"]
+CMD ["./init_mariadb.sh"]
