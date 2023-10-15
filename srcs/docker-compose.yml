@@ -23,7 +23,7 @@ services:
     container_name: nginx
     build: 
       context: requirements/nginx
-      dockerfile: 
+      dockerfile: Dockerfile
       args:
         - DOMAIN_NAME=${DOMAIN_NAME}
     init: true
