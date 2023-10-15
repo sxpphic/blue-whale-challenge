@@ -1,23 +1,9 @@
 version: '3.9'
 
 services:
-  mariadb:
-    env_file:
-      - .env
-    container_name: mariadb
-    build: requirements/mariadb
-    init: true
-    volumes:
-      - mariadb-volume:/var/lib/mysql/
-    restart: always
-    networks:
-      - blue-network
-    ports:
-      - 3306:3306
-
   nginx:
-    depends_on:
-      - wordpress
+#    depends_on:
+#      - wordpress
     env_file:
       - .env
     container_name: nginx
@@ -34,12 +20,11 @@ services:
       - blue-network
     ports:
       - 433:433
-
   wordpress:
       depends_on:
-        - mariadb
+       - mariadb
       env_file:
-        - .env
+       - .env
       container_name: wordpress
       build: requirements/wordpress
       init: true
@@ -47,9 +32,22 @@ services:
       volumes:
       - wordpress-volume:/var/www/html
       networks:
-        - blue-network
-      ports:
-        - 9000:9000
+       - blue-network
+#      ports:
+#        - 9000:9000
+  mariadb:
+    env_file:
+      - .env
+    container_name: mariadb
+    build: requirements/mariadb
+    init: true
+    volumes:
+      - mariadb-volume:/var/lib/mysql/
+    restart: always
+    networks:
+      - blue-network
+#    ports:
+#      - 3306:3306
 networks:
   blue-network:
     driver: bridge
