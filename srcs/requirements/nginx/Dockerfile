@@ -5,22 +5,15 @@ FROM debian:bullseye
 RUN apt update && apt install -y --no-install-recommends \
 	openssl \
 	nginx \
-	curl \
-	ca-certificates \
 	&& rm -rf /var/lib/apt/lists/*
 
-COPY conf/example.com.conf /etc/nginx/sites-available/default
+ARG DOMAIN_NAME
 
-#COPY tools/. .
-#COPY conf/. .
+RUN mkdir -p /etc/nginx/certs && \
+	 openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+	-keyout /etc/nginx/certs/server.key \
+	-out /etc/nginx/certs/server.crt -subj "/CN=${DOMAIN_NAME}"
 
-#ARG DOMAIN_NAME
-#RUN chmod +x init_nginx.sh\
-##	&& sed -i "s/example.com/${DOMAIN_NAME}/g" /etc/nginx/conf.d/${DOMAIN_NAME}.conf \
-# tirar vim e curl
-
-#EXPOSE 443
-
-#CMD  ["./init_nginx"]
+COPY conf/nginx.conf /etc/nginx/http.d/default.conf
 
 CMD [ "nginx", "-g", "daemon off;" ]

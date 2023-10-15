@@ -21,7 +21,11 @@ services:
     env_file:
       - .env
     container_name: nginx
-    build: requirements/nginx
+    build: 
+      context: requirements/nginx
+      dockerfile: 
+      args:
+        - DOMAIN_NAME=${DOMAIN_NAME}
     init: true
     volumes:
       - wordpress-volume:/var/www/html
@@ -38,8 +42,6 @@ services:
         - .env
       container_name: wordpress
       build: requirements/wordpress
-        args:
-          - DOMAIN_NAME=${DOMAIN_NAME}
       init: true
       restart: always
       volumes:
@@ -55,12 +57,14 @@ networks:
 
 volumes:
   mariadb-volume:
+    name: mariadb-volume
     driver: local
     driver_opts:
       o: bind
       type: none
       device: ~/data/mariadb
   wordpress-volume:
+    name: mariadb-volume
     driver: local
     driver_opts:
       o: bind
