@@ -8,8 +8,9 @@ RUN apt update && apt install -y --no-install-recommends \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& chmod -R 755 /var/lib/mysql/
 
+RUN sed -i "s/127.0.0.1/0.0.0.0/g" etc/mysql/mariadb.conf.d/50-server.cnf
+
 COPY ./tools/init_mariadb.sh .
-COPY ./tools/50-server.cnf /etc/mysql/mariadb.conf.d/
 
 RUN chmod +x init_mariadb.sh
 
