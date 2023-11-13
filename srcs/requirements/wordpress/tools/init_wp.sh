@@ -30,7 +30,7 @@ wp core install --url=$DOMAIN_NAME/ --title=$WP_TITLE --admin_user=$WP_ADMIN_USE
 
 wp user create $WP_USER $WP_EMAIL --role=author --user_pass=$WP_PASSWORD --allow-root
 
-wp theme install astra --activate --allow-root
+wp theme install twentytwentytwo --activate --allow-root
 
 wp plugin update --all --allow-root
 sed -i 's/listen = \/run\/php\/php7.4-fpm.sock/listen = 9000/g' /etc/php/7.4/fpm/pool.d/www.conf
