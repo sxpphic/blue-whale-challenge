@@ -33,8 +33,6 @@ services:
       - wordpress-volume:/var/www/html
       networks:
        - blue-network
-#      ports:
-#        - 9000:9000
   mariadb:
     env_file:
       - .env
@@ -46,11 +44,9 @@ services:
     restart: always
     networks:
       - blue-network
-#    ports:
-#      - 3306:3306
+
 networks:
   blue-network:
-    driver: bridge
     name: blue-network
 
 volumes:
@@ -62,10 +58,9 @@ volumes:
       type: none
       device: ~/data/mariadb
   wordpress-volume:
-    name: mariadb-volume
+    name: wordpress-volume
     driver: local
     driver_opts:
       o: bind
       type: none
       device: ~/data/wordpress
-
