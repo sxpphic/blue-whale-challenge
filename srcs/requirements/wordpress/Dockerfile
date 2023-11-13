@@ -10,12 +10,5 @@ RUN	apt update && apt install -y --no-install-recommends \
 	&& rm -rf /var/lib/apt/lists/*
 
 COPY tools/init_wp.sh .
-RUN chmod +x init_wp.sh
-
-#RUN	curl https://wordpress.org/latest.tar.gz -o latest.tar.gz \
-#	&& tar -xvzf latest.tar.gz \
-#	&& rm latest.tar.gz \
-#	&& mkdir -p /run/php/
-	#&& mkdir -p /var/www/html/${DOMAIN_NAME} \
 
 CMD ["./init_wp.sh"]

@@ -9,8 +9,4 @@ RUN apt update && apt install -y --no-install-recommends \
 
 COPY tools/init_nginx.sh /
 
-# n precisa dar chdmod se no host machine estiver executavel.
-
-CMD ["/init_nginx.sh"]
-
-# uhmm pode fazer isso
+CMD ["./init_nginx.sh"]

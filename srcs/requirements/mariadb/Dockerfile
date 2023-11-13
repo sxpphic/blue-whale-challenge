@@ -12,10 +12,6 @@ RUN sed -i "s/127.0.0.1/0.0.0.0/g" etc/mysql/mariadb.conf.d/50-server.cnf
 
 COPY ./tools/init_mariadb.sh .
 
-RUN chmod +x init_mariadb.sh
-
-#EXPOSE 3306
-
 VOLUME [ "/var/lib/mysql" ]
 
 CMD ["./init_mariadb.sh"]
