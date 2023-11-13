@@ -7,13 +7,10 @@ RUN apt update && apt install -y --no-install-recommends \
 	nginx \
 	&& rm -rf /var/lib/apt/lists/*
 
-ARG DOMAIN_NAME
+COPY tools/init_nginx.sh /
 
-RUN mkdir -p /etc/nginx/certs && \
-	 openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-	-keyout /etc/nginx/certs/server.key \
-	-out /etc/nginx/certs/server.crt -subj "/CN=${DOMAIN_NAME}"
+# n precisa dar chdmod se no host machine estiver executavel.
 
-COPY conf/nginx.conf /etc/nginx/http.d/default.conf
+CMD ["/init_nginx.sh"]
 
-CMD [ "nginx", "-g", "daemon off;" ]
+# uhmm pode fazer isso

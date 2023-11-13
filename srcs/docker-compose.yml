@@ -19,7 +19,7 @@ services:
     networks:
       - blue-network
     ports:
-      - 433:433
+      - 443:443
   mariadb:
     env_file:
       - .env
