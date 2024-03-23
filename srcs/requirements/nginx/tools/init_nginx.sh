@@ -1,6 +1,6 @@
 #!/bin/bash
 
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out $CERTS_ -subj "/C=BR/L=BR/O=42/OU=student/CN=vipereir.42.fr"
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt -subj "/C=BR/L=BR/O=42/OU=student/CN=vipereir.42.fr"
 
 echo "
 server {
@@ -9,7 +9,7 @@ server {
 
     #server_name www.$DOMAIN_NAME $DOMAIN_NAME;
 
-    ssl_certificate $CERTS_;
+    ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
     ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
 
     ssl_protocols TLSv1.2 TLSv1.3;
