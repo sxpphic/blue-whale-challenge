@@ -27,6 +27,8 @@ services:
     restart: always
     networks:
       - blue-network
+    ports:
+      - 3306:3306
   wordpress:
       depends_on:
        - mariadb
@@ -40,6 +42,8 @@ services:
       - wordpress-volume:/var/www/html
       networks:
        - blue-network
+      ports:
+       - 9000:9000
 
 networks:
   blue-network:
